@@ -4,23 +4,25 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 using namespace std;
 
  ifstream select;
 
 void wordSearch( string word) {
 	int count = 0, counter=0;
-    string text[200];
+	string textWord;
+   vector <string> text;
 	select.open("C:\\Users\\Александр\\Documents\\text for program\\select.txt");
-   if (!select) {
-			cout << " no";
-		}
    while (!select.eof()) {
-	   select >> text[count];
+	   if (select.eof()) {
+		   break;
+	   }
+	   select >> textWord;
+	   text.push_back(textWord);
 	   count++;
-	  
-   }
-   for (int i = 0; i < count; i++) {
+   } 
+  for (int i = 0; i < count; i++) {
 	   cout << text[i] << " ";
    }
    for (int i = 0; i < count; i++) {
@@ -35,7 +37,7 @@ void wordSearch( string word) {
 
 int main(){
 	 string word;
-	cout << "\nInput word ";
+	cout << "\nInput the word ";
 	cin >> word;
 	wordSearch(word);
 }

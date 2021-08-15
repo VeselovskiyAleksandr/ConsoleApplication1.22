@@ -10,19 +10,20 @@ using namespace std;
 
 int main()
 {
+
     ifstream payment_statement;
     vector <string> text;
-    string name, date, family, payOut;
+    string name, date, family, payOut, path, nameFiles;
     int payouts, maxPayout = 0, sumPayouts = 0, numberName, sum = 0;
     payment_statement.open("C:\\Users\\Александр\\Documents\\text for program\\payment statement.txt");
-    if (payment_statement.is_open()) {
-        cout << "\nThe file is found. \n\n";
+    if (payment_statement.is_open()) { 
+      cout << "\nThe file is found. \n\n";
     }
     else {
         cout << "\nThe file is not found. ";
     }
-    while (!payment_statement.eof()) {
-        payment_statement >> name >> family >> payouts >> date;
+    while (!payment_statement.eof()) { 
+       payment_statement >> name >> family >> payouts >> date;
         if (payouts > maxPayout) {
             maxPayout = payouts;
             numberName = sum + 1;
@@ -39,8 +40,7 @@ int main()
         if (i > 0 && (i % 4 == 0)) {
             cout << "\n";
         }
-        cout << text[i] << " ";
-       
+        cout << text[i] << " ";      
     }
     cout << "\n\nThe amount of paymentsn is a " << sumPayouts << "\n";
     cout << "The maximum amount received was " << maxPayout << ". " << " This amount has been paid to ";
