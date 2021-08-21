@@ -10,20 +10,26 @@ using namespace std;
 
 void wordSearch( string word) {
 	int  counter=0;	
-	select.open("C:\\Users\\Александр\\Documents\\text for program\\select.txt");
 	while (!select.eof()) {
       string textWord;
 		select >> textWord;
 		counter+=word== textWord;
 		cout << textWord << " ";
 	}
-	cout << "\nIn this text there are " << counter << " specified words";
+	cout << "\n\nIn this text there are " << counter << " specified words.\n";
 	select.close();
 }
 
 int main(){
+	select.open("C:\\Users\\Александр\\Documents\\text for program\\select.txt");
+if (select.is_open()) {
+		cout << "This file is found";
+	}
+	else {
+		cout << "\nThis file does not found";
+	}
 	 string word;
-	cout << "\nInput the word ";
+	cout << "\nInput the word:  ";
 	cin >> word;
 	wordSearch(word);
 }
