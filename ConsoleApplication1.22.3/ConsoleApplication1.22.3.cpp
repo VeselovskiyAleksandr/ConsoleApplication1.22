@@ -12,9 +12,8 @@ int main()
 {
 
     ifstream payment_statement;
-    vector <string> text;
-    string name, date, family, payOut, path, nameFiles;
-    int payouts, maxPayout = 0, sumPayouts = 0, numberName, sum = 0;
+    vector <string> text;  
+    int payouts, maxPayout = 0, sumPayouts = 0, numberName, str = 0;
     payment_statement.open("C:\\Users\\Александр\\Documents\\text for program\\payment statement.txt");
     if (payment_statement.is_open()) { 
       cout << "\nThe file is found. \n\n";
@@ -23,10 +22,11 @@ int main()
         cout << "\nThe file is not found. ";
     }
     while (!payment_statement.eof()) { 
+      string name, date, family, payOut;
        payment_statement >> name >> family >> payouts >> date;
         if (payouts > maxPayout) {
             maxPayout = payouts;
-            numberName = sum + 1;
+            numberName = str + 1;
         }
         sumPayouts += payouts;
         payOut = to_string(payouts);
@@ -34,15 +34,15 @@ int main()
         text.push_back(family);
         text.push_back(payOut);
         text.push_back(date);
-        sum += 4;
+        str += 4;
     }
-    for (int i = 0; i < sum-4; i++) {
+    for (int i = 0; i < str-4; i++) {
         if (i > 0 && (i % 4 == 0)) {
             cout << "\n";
         }
         cout << text[i] << " ";      
     }
-    cout << "\n\nThe amount of paymentsn is a " << sumPayouts << "\n";
+    cout << "\n\nThe amount of payments is a " << sumPayouts << "\n";
     cout << "The maximum amount received was " << maxPayout << ". " << " This amount has been paid to ";
     cout<< text[numberName-1]<<" "<<text[numberName];
 payment_statement.close();
