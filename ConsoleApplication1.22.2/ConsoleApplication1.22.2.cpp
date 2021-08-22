@@ -22,7 +22,7 @@ int main()
 		cout << "\n                                                       page " << pageNumber;
 		cout<< "\n        ";
 		if (pageNumber > 3) {
-			cout << "\nIn this text page " << pageNumber << " are absent.";
+			cout << "\nIn this text page " << pageNumber << " is absent.";
 		}
 			Anthony_Hope_Rupert_Of_Hentzau.seekg((pageNumber - 1) * 99 * 43, Anthony_Hope_Rupert_Of_Hentzau.beg);
      //Для удобства чтения задаём длину строки равной 100;
