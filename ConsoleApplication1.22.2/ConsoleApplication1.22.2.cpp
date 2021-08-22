@@ -3,15 +3,13 @@
 
 #include <iostream>
 #include <fstream>
-#include <vector>
 using namespace std; 
 
 int main()
 {
-//	vector <string> text;
 	ifstream Anthony_Hope_Rupert_Of_Hentzau;
-//	int count = 0, countWords=0, pageNumber=0;
-	char buffer[6];
+	int pageNumber = 0;
+	char buffer[100];
 	Anthony_Hope_Rupert_Of_Hentzau.open("C:\\users\\Александр\\Documents\\text for program\\Anthony Hope Rupert Of Hentzau.txt", ios::binary);
     if (Anthony_Hope_Rupert_Of_Hentzau.is_open()) {
 		cerr << "The file is found \n";
@@ -19,42 +17,29 @@ int main()
 	else {
 		cerr << "\nThe file does not found";
 	}
-	while (!Anthony_Hope_Rupert_Of_Hentzau.eof()/3) {
-		Anthony_Hope_Rupert_Of_Hentzau.read(buffer, sizeof(buffer)-1);
-		buffer[Anthony_Hope_Rupert_Of_Hentzau.gcount()] = 0;
-		cout << buffer;
-	}
-//	while (!Anthony_Hope_Rupert_Of_Hentzau.eof()) {
-//		string word;
-//		Anthony_Hope_Rupert_Of_Hentzau >> word;
-//		text.push_back(word);
-//		count++;
-//	}
-//	cout << "Enter the number of page. ";
-//	cin >> pageNumber;  
-//	cout << "\n                                page " << pageNumber;
-//	cout<< "\n        ";
-//	 for (int i = 12 * 45 *(pageNumber-1); i < 12 * 45 * pageNumber; i++) {
-//		 if (pageNumber == 0) {
-//			 cout << "\n\n\n                        A N T O N Y    H O P E  ";
-//			cout << "\n\n                 R U P E R T   O F   H E N T Z A U \n\n";
-//			break;
-//		 }
-//		 else if (pageNumber > (count / 12) / 45 + 1) {
-//			 cout << "\n   In this text this page are absent.";
-//			 break;
-//		 }
-//		 if (i == count) {
-//			 break;
-//		 }
-//		 if (sizeof(text[i]) > 350 - countWords) {        //Для удобства чтения  
-//			 cout << "\n       ";                     //задаём количество слов в строке равным 12;
-//			 countWords = 0;                          //количество строк на странице равным 45
-//		 }
-//		 cout << text[i] << " ";
-//		countWords +=sizeof(text[i]) ;
-//	}
-//	 cout << "\n";
+	cout << "Enter the number of page. ";
+	cin >> pageNumber;
+		cout << "\n                                                       page " << pageNumber;
+		cout<< "\n        ";
+		if (pageNumber > 3) {
+			cout << "\nIn this text page " << pageNumber << " are absent.";
+		}
+			Anthony_Hope_Rupert_Of_Hentzau.seekg((pageNumber - 1) * 99 * 43, Anthony_Hope_Rupert_Of_Hentzau.beg);
+     //Для удобства чтения задаём длину строки равной 100;
+	 //количество строк на странице равным 43.
+		for(int i=0; i<43; i++){
+				Anthony_Hope_Rupert_Of_Hentzau.read(buffer, sizeof(buffer) - 1);
+			if (pageNumber == 0) {
+				cout << "\n\n\n                                               A N T O N Y    H O P E  ";
+				cout << "\n\n                                        R U P E R T   O F   H E N T Z A U \n\n";
+				break;
+			}
+			if (Anthony_Hope_Rupert_Of_Hentzau.gcount() == 99) {
+				cout << "\n           ";
+			}
+				buffer[Anthony_Hope_Rupert_Of_Hentzau.gcount()] = 0;
+				cout << buffer;				
+		}
 		Anthony_Hope_Rupert_Of_Hentzau.close();
 		return 0;
 }
