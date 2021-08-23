@@ -8,15 +8,24 @@ using namespace std;
 int main()
 {
 	ifstream Anthony_Hope_Rupert_Of_Hentzau;
-	int pageNumber = 0;
+	int pageNumber = 0, strNumber, strLength;
 	char buffer[100];
-	Anthony_Hope_Rupert_Of_Hentzau.open("C:\\users\\Александр\\Documents\\text for program\\Anthony Hope Rupert Of Hentzau.txt", ios::binary);
+Anthony_Hope_Rupert_Of_Hentzau.open("C:\\users\\Александр\\Documents\\text for program\\Anthony Hope Rupert Of Hentzau.txt", ios::binary);
     if (Anthony_Hope_Rupert_Of_Hentzau.is_open()) {
-		cerr << "The file is found \n";
+		cout << "The file is found \n";
 	}
 	else {
 		cerr << "\nThe file does not found";
+		return 1;
 	}
+	cout << "\nEnter the length of string"; //Для удобства чтения задаём длину строки равной 100;	
+	cin >> strLength;                      //количество строк на странице равным 43.
+	if (strLength > 99) {
+		cout << "\nThe length can't be longer then 99 ";
+		return 2;
+	}
+	cout << "\nEnter the number of string on the pages";
+	cin >> strNumber;
 	cout << "Enter the number of page. ";
 	cin >> pageNumber;
 		cout << "\n                                                       page " << pageNumber;
@@ -24,21 +33,23 @@ int main()
 		if (pageNumber > 3) {
 			cout << "\nIn this text page " << pageNumber << " is absent.";
 		}
-			Anthony_Hope_Rupert_Of_Hentzau.seekg((pageNumber - 1) * 99 * 43, Anthony_Hope_Rupert_Of_Hentzau.beg);
-     //Для удобства чтения задаём длину строки равной 100;
-	 //количество строк на странице равным 43.
-		for(int i=0; i<43; i++){
+			Anthony_Hope_Rupert_Of_Hentzau.seekg((pageNumber - 1) * strLength* strNumber, Anthony_Hope_Rupert_Of_Hentzau.beg);
+    
+		for(int i=0; i<strNumber; i++){
 				Anthony_Hope_Rupert_Of_Hentzau.read(buffer, sizeof(buffer) - 1);
 			if (pageNumber == 0) {
 				cout << "\n\n\n                                               A N T O N Y    H O P E  ";
 				cout << "\n\n                                        R U P E R T   O F   H E N T Z A U \n\n";
 				break;
 			}
-			if (Anthony_Hope_Rupert_Of_Hentzau.gcount() == 99) {
+			if (Anthony_Hope_Rupert_Of_Hentzau.gcount() == strLength) {
 				cout << "\n           ";
 			}
 				buffer[Anthony_Hope_Rupert_Of_Hentzau.gcount()] = 0;
-				cout << buffer;				
+				cout << buffer;	
+				if (buffer[Anthony_Hope_Rupert_Of_Hentzau.gcount()]) {
+					break;
+				}
 		}
 		Anthony_Hope_Rupert_Of_Hentzau.close();
 		return 0;
