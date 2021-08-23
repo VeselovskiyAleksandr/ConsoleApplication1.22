@@ -3,10 +3,37 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
+using namespace std;
 
 int main()
 {
-  ifstream  
+	string path, heading, detector="ЙPNG";
+	ifstream tree;
+	char ch, sym='-119';
+	path = "C:\\Users\\Александр\\Documents\\text for program\\tree.png";
+//	path = "C:\\Users\\Александр\\Pictures\\tree.jpg";
+	tree.open(path);
+	if (tree.is_open()) {
+		cout << "\nThe file is open.";
+	}
+	else {
+		cout << "\nThe file does not found.";
+	}
+	tree >> ch;// heading;// >> m;
+	if (heading == detector) {
+		cout << "\nThis file has type PNG";
+	}
+	else {
+		cout << "\nThis file has not type PNG";
+	}
+	if (ch == sym) {
+		cout << "yes";
+	}
+	else {
+		cout << "no";
+	}
+	cout << "\n" << ch;// heading;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
