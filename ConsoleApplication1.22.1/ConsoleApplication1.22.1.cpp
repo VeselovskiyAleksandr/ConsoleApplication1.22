@@ -8,7 +8,18 @@ using namespace std;
 
  ifstream select;
 
-void wordSearch( string word) {
+int main(){
+	 string word;
+	select.open("C:\\Users\\Александр\\Documents\\text for program\\select.txt");	
+if (select.is_open()) {
+		cout << "This file is found\n";
+	}
+	else {
+		cerr << "\nThis file does not found";
+		return 2;
+	}
+cout << "\nInput the word:  ";
+	cin >> word;
 	int  counter=0;	
 	while (!select.eof()) {
       string textWord;
@@ -17,21 +28,8 @@ void wordSearch( string word) {
 		cout << textWord << " ";
 	}
 	cout << "\n\nIn this text there are " << counter << " specified words.\n";
-	select.close();
-}
-
-int main(){
-	select.open("C:\\Users\\Александр\\Documents\\text for program\\select.txt");
-if (select.is_open()) {
-		cout << "This file is found";
-	}
-	else {
-		cout << "\nThis file does not found";
-	}
-	 string word;
-	cout << "\nInput the word:  ";
-	cin >> word;
-	wordSearch(word);
+	select.close();	
+	return 0;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
