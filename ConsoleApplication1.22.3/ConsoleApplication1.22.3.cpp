@@ -35,6 +35,7 @@ int main()
     cout << "The maximum amount received was " << maxPayout << ". " << " This amount has been paid to " << nameFamily[0];
     cout<<" "<< nameFamily[1]<<"\n";
     payment_statement.close();
+    return 0;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
