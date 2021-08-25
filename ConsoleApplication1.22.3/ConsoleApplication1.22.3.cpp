@@ -18,6 +18,7 @@ int main()
     }
     else {
         cerr << "\nThe file is not found. ";
+        return 1;
     }
     while (!payment_statement.eof()) { 
       string name, family, payOut, date;  
