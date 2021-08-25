@@ -8,32 +8,30 @@ using namespace std;
 
 int main()
 {
-	string path, heading, detector="ЙPNG";
-	ifstream tree;
-	char ch, sym='-119';
+    ifstream tree;
+	string path;
+	int firstByte, meaning=-119;
+string detector = "PNG", s ;
 	path = "C:\\Users\\Александр\\Documents\\text for program\\tree.png";
-//	path = "C:\\Users\\Александр\\Pictures\\tree.jpg";
 	tree.open(path);
 	if (tree.is_open()) {
 		cout << "\nThe file is open.";
 	}
 	else {
-		cout << "\nThe file does not found.";
+		cerr << "\nThe file does not found.";
+	}	
+	tree >> s;
+	firstByte = (int)s[0];
+	if (firstByte == meaning) {
+		tree.seekg(1) >> s;
+		if (s == detector) {
+			cout << "\nThis file has type PNG";
+		}
 	}
-	tree >> ch;// heading;// >> m;
-	if (heading == detector) {
-		cout << "\nThis file has type PNG";
-	}
-	else {
-		cout << "\nThis file has not type PNG";
-	}
-	if (ch == sym) {
-		cout << "yes";
-	}
-	else {
-		cout << "no";
-	}
-	cout << "\n" << ch;// heading;
+		else {
+			cout << "\nThis file has not type PNG";
+		}
+	tree.close();
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
