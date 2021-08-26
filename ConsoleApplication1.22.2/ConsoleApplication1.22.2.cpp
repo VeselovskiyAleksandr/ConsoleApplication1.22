@@ -7,51 +7,41 @@ using namespace std;
 
 int main()
 {
-	ifstream Anthony_Hope_Rupert_Of_Hentzau;
-	int pageNumber = 0, strNumber, strLength;
+	ifstream file;
+	int pageNumber = 0, strNumber;
 	char buffer[100];
-Anthony_Hope_Rupert_Of_Hentzau.open("C:\\users\\Александр\\Documents\\text for program\\Anthony Hope Rupert Of Hentzau.txt", ios::binary);
-    if (Anthony_Hope_Rupert_Of_Hentzau.is_open()) {
-		cout << "The file is found \n";
+file.open("C:\\users\\Александр\\Documents\\text for program\\Anthony Hope Rupert Of Hentzau.txt", ios::binary);	
+    if (file.is_open()) {
+		cout << "The file is open \n";
 	}
 	else {
 		cerr << "\nThe file does not found";
 		return 1;
-	}
-	cout << "\nEnter the length of string"; //Для удобства чтения задаём длину строки равной 100;	
-	cin >> strLength;                      //количество строк на странице равным 43.
-	if (strLength > 99) {
-		cout << "\nThe length can't be longer then 99 ";
-		return 2;
-	}
-	cout << "\nEnter the number of string on the pages";
-	cin >> strNumber;
+	}	                    
+	cout << "Enter the number of string on the pages";  //Для удобства чтения задаём длину строки равной 100;		                   
+	cin >> strNumber;                                    //количество строк на странице задаёт пользователь.
 	cout << "Enter the number of page. ";
 	cin >> pageNumber;
 		cout << "\n                                                       page " << pageNumber;
 		cout<< "\n        ";
-		if (pageNumber > 3) {
-			cout << "\nIn this text page " << pageNumber << " is absent.";
-		}
-			Anthony_Hope_Rupert_Of_Hentzau.seekg((pageNumber - 1) * strLength* strNumber, Anthony_Hope_Rupert_Of_Hentzau.beg);
-    
+		file.seekg((pageNumber - 1) *99 * strNumber);  
 		for(int i=0; i<strNumber; i++){
-				Anthony_Hope_Rupert_Of_Hentzau.read(buffer, sizeof(buffer) - 1);
+				file.read(buffer, sizeof(buffer) - 1);
 			if (pageNumber == 0) {
 				cout << "\n\n\n                                               A N T O N Y    H O P E  ";
 				cout << "\n\n                                        R U P E R T   O F   H E N T Z A U \n\n";
 				break;
 			}
-			if (Anthony_Hope_Rupert_Of_Hentzau.gcount() == strLength) {
+			if (file.gcount() == 99) {
 				cout << "\n           ";
 			}
-				buffer[Anthony_Hope_Rupert_Of_Hentzau.gcount()] = 0;
+				buffer[file.gcount()] = 0;
 				cout << buffer;	
-				if (buffer[Anthony_Hope_Rupert_Of_Hentzau.gcount()]) {
+				if (buffer[file.gcount()]) {
 					break;
 				}
 		}
-		Anthony_Hope_Rupert_Of_Hentzau.close();
+		file.close();
 		return 0;
 }
 
