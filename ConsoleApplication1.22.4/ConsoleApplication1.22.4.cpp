@@ -11,7 +11,7 @@ int main()
     ifstream tree;
 	string path;
 	int firstByte, meaning=-119;
-string detector = "PNG", s ;
+string detector = "PNG", heading ;
 	path = "C:\\Users\\Александр\\Documents\\text for program\\tree.png";
 	tree.open(path);
 	if (tree.is_open()) {
@@ -20,12 +20,15 @@ string detector = "PNG", s ;
 	else {
 		cerr << "\nThe file does not found.";
 	}	
-	tree >> s;
-	firstByte = (int)s[0];
+	tree >> heading;
+	firstByte = (int) heading[0];
 	if (firstByte == meaning) {
-		tree.seekg(1) >> s;
-		if (s == detector) {
+		tree.seekg(1) >> heading;
+		if (heading == detector) {
 			cout << "\nThis file has type PNG";
+		}
+		else {
+			cout << "\nThis file has not type PNG";
 		}
 	}
 		else {
