@@ -1,5 +1,5 @@
-﻿// ConsoleApplication1.22.4.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//Урок 19. Задача 4.Разработка детектора PNG-файла.
+﻿// ConsoleApplication1.22.5.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+//Урок 19. Задача 5. Реализация игры "Что? Где? Когда?"
 
 #include <iostream>
 #include <fstream>
@@ -8,48 +8,27 @@ using namespace std;
 
 int main()
 {
-    ifstream tree;
-	string path;
-	int firstByte, meaning=-119;
-    string detector = "PNG", heading, fileExtension;
-	path = "C:\\Users\\Александр\\Documents\\text for program\\tree.png";
-	fileExtension = path;
-	tree.open(path);
-	if (tree.is_open()) {
-		cout << "\nThe file is open.";
+	ifstream file;
+	char buffer[75];
+	int experts = 0, tvwiewers = 0, drum=0;
+	string answers, test = "yes, yes, yes, yes, no, yes, yes, no, yes, yes, yes, no, no ";
+	file.open("C:\\Users\\Александр\\Documents\\text for program\\what where when.txt");
+	if (file.is_open()) {
+		cout << "The file is open";
 	}
 	else {
-		cerr << "\nThe file does not found.";
-		return 1;
-	}	
-	for (int i = 2; i >= 0; i--) {
-		if (fileExtension.back() != detector[i]+32) {
-			cout << "\nThis file has not type PNG";
-			return 2;
-		}
-		else {
-			fileExtension.pop_back();
-		}
+		cerr << "\nThe file does not found";
 	}
-	tree >> heading;
-	firstByte = (int) heading[0];
-	if (firstByte == meaning) {
-		tree.seekg(1) >> heading;
-		for (int i = 0; i < 3; i++) {
-			if (heading[i] != detector[i]) {
-				cout << "\nThis file has not type PNG";
-				break;
-			}
-			else if (i==2){				
-             cout << "\nThis file has type PNG";
-			}
-		}
-	}
-		else {
-			cout << "\nThis file has not type PNG";
-		}
-	tree.close();
-	return 0;
+	file.read(buffer, sizeof(buffer) - 1);
+	
+	file.seekg(0);
+	cout << "\nSpin the drum (enter are number from 1 to 13) ";
+	cin >> drum;
+	file.seekg(drum);
+	buffer[file.gcount()] = 0;
+	file >> answers;
+	cout<<"\n" <<answers;
+	file.close();
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
