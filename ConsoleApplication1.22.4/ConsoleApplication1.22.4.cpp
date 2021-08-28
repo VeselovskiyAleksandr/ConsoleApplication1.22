@@ -31,6 +31,10 @@ int main()
 			fileExtension.pop_back();
 		}
 	}
+	if (fileExtension.back()!='.') {
+		cout << "\nThis file has not type PNG";
+		return 3;
+	}
 	tree >> heading;
 	firstByte = (int) heading[0];
 	if (firstByte == meaning) {

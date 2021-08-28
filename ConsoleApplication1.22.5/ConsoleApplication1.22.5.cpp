@@ -24,7 +24,7 @@ int main()
 	file.seekg(0);
 	cout << "\nSpin the drum (enter are number from 1 to 13) ";
 	cin >> drum;
-	file.seekg(drum);
+	file.seekg(drum-1);
 	buffer[file.gcount()] = 0;
 	file >> answers;
 	cout<<"\n" <<answers;
