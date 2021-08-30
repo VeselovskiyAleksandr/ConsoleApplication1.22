@@ -4,31 +4,71 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 using namespace std;
 
 int main()
 {
 	ifstream file;
-	char buffer[75];
-	int experts = 0, tvwiewers = 0, drum=0;
-	string answers, test = "yes, yes, yes, yes, no, yes, yes, no, yes, yes, yes, no, no ";
-	file.open("C:\\Users\\Александр\\Documents\\text for program\\what where when.txt");
+	char buffer[79];
+	int experts = 0, tvwiewers = 0, drum = 0, n=0;
+    vector <int> motion = {14};
+	string answer;
+	file.open("C:\\Users\\Александр\\Documents\\text for program\\what where when.txt", ios::binary);
 	if (file.is_open()) {
-		cout << "The file is open";
+		cout << "The file is open"; 
 	}
 	else {
 		cerr << "\nThe file does not found";
+		return 1;
 	}
-	file.read(buffer, sizeof(buffer) - 1);
-	
 	file.seekg(0);
+	while(experts<6||tvwiewers<6){		
 	cout << "\nSpin the drum (enter are number from 1 to 13) ";
-	cin >> drum;
-	file.seekg(drum-1);
+	do {
+		cin >> drum;
+		if (drum < 1 || drum>13) {
+			cout << "\nRotate the drum correctly. ";
+		}
+	} while (drum < 1 || drum > 13);
+	int i = 0;
+	do {
+		if (drum == motion[i]) {
+			drum++;
+			i = 0;
+}
+		i++;
+	} while (i<=n);
+	motion.push_back(drum);
+	n++;
+	file.seekg(2 * (drum - 1) * 79);
+	file.read(buffer, sizeof(buffer) - 1);
 	buffer[file.gcount()] = 0;
-	file >> answers;
-	cout<<"\n" <<answers;
+	cout << buffer;
+	cout << "\nEnter the answer ";
+	cin >> answer;
+	file.seekg((2 * drum - 1) * 79);
+	file.read(buffer, sizeof(buffer) - 1);
+	buffer[file.gcount()] = 0;
+    cout << "\nAttention! The right answer: " << buffer;
+	if (answer[0] == buffer[0]) {
+		experts++;
+	}
+	else {
+		tvwiewers++;
+	}
+	if (experts == 6) {
+		cout << "\nThe victory is for experts! ";
+		break;
+	}
+	if (tvwiewers == 6) {
+		cout << "\nThe victory is for tvwiewers! ";
+		break;
+	}
+}
+	
 	file.close();
+	return 0;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
